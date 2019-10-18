@@ -17,7 +17,6 @@ export default class Login extends Component {
   componentDidHide() {}
 
   getUserInfo(v) {
-    console.log(v.detail.userInfo)
     this.getLogin(v.detail.userInfo)
   }
 
