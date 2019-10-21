@@ -15,6 +15,8 @@ const ip = require('ip')
  * @param {} userInfo.openId 用户的openid
  */
 exports.main = async function(event, context) {
+  console.log('config', mpAppId, KEY)
+
   const { type, data, userInfo } = event
   const wxContext = cloud.getWXContext()
   const openid = userInfo.openId

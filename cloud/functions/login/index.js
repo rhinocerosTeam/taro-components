@@ -3,9 +3,10 @@ const got = require('got')
 
 cloud.init({ env: 'prod-70p4d', traceUser: true })
 const db = cloud.database()
-exports.main = async query => {
+exports.main = async (event, context) => {
+  var query = event
   const wxContext = cloud.getWXContext()
-  console.log('query', query)
+  console.log('query', query, 'aaa', process.env.aaa)
   var userInfo = JSON.parse(query.userInfo)
   console.log('query', query, userInfo)
   var user = {

@@ -3,9 +3,8 @@ import { View, Text } from '@tarojs/components'
 import './index.less'
 
 import Login from '../../components/login/index'
-
+import Pay from '../../components/pay/index'
 export default class Index extends Component {
-
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -17,20 +16,21 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  componentWillMount() {}
 
-  componentDidMount () { }
+  componentDidMount() {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
+  render() {
     return (
       <View className='index'>
-        <Login/>
+        <Login />
+        <Pay />
       </View>
     )
   }
