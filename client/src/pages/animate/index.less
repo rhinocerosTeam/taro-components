@@ -1,0 +1,39 @@
+.box {
+  width: 750px;
+  height: 100vh;
+}
+.blueviolet,
+.burlywood {
+  width: 100px;
+  height: 100px;
+  background-color: blueviolet;
+  transform-origin: 50% 50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.burlywood {
+  background-color: burlywood;
+}
+@keyframes rotateAnimation {
+  0% {
+    transform: translate(0, 0) scale(1, 1) rotate(0);
+  }
+
+  100% {
+    transform: translate(150rpx, 150rpx) scale(1, 2) rotate(360deg);
+  }
+}
+@-webkit-keyframes rotateAnimation {
+  0% {
+    transform: translate(0, 0) scale(1, 1) rotate(0);
+  }
+
+  100% {
+    transform: translate(150rpx, 150rpx) scale(1, 2) rotate(360deg);
+  }
+}
+.cssAnimate {
+  animation: rotateAnimation 1s ease both;
+  -webkit-animation: rotateAnimation 1s ease both;
+}

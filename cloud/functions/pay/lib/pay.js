@@ -1,18 +1,10 @@
-const {
-  mpAppId,
-  MCHID,
-  KEY,
-  TIMEOUT,
-} = require('../config/index');
-const {
-  WXPayConstants,
-  WXPay
-} = require('wx-js-utils');
+const { APPID, MCHID, PAYKEY, TIMEOUT } = require('../config/index')
+const { WXPayConstants, WXPay } = require('wx-js-utils')
 
 const wxpay = new WXPay({
-  appId: mpAppId,
+  appId: APPID,
   mchId: MCHID,
-  key: KEY,
+  key: PAYKEY,
   timeout: TIMEOUT,
   signType: WXPayConstants.SIGN_TYPE_MD5,
   useSandbox: false // 不使用沙箱环境

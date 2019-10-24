@@ -1,10 +1,9 @@
 const cloud = require('wx-server-sdk')
-cloud.init()
-
+const { WXPayConstants, WXPayUtil, WXPay } = require('wx-js-utils')
+const { APPID, MCHID, PAYKEY, TIMEOUT, envName } = require('./config/index')
 const app = require('tcb-admin-node')
+cloud.init({ env: envName, traceUser: true })
 const pay = require('./lib/pay')
-const { mpAppId, KEY } = require('./config/index')
-const { WXPayConstants, WXPayUtil } = require('wx-js-utils')
 const Res = require('./lib/res')
 const ip = require('ip')
 
@@ -12,15 +11,13 @@ const ip = require('ip')
  *
  * @param {obj} event
  * @param {string} event.type 功能类型
- * @param {} userInfo.openId 用户的openid
  */
 exports.main = async function(event, context) {
-  console.log('config', mpAppId, KEY)
-
-  const { type, data, userInfo } = event
+  const { type, data } = event
   const wxContext = cloud.getWXContext()
-  const openid = userInfo.openId
 
+  const openid = wxContext.OPENID
+  console.log('openid', openid)
   app.init()
   const db = app.database()
   const goodCollection = db.collection('goods')
@@ -56,6 +53,7 @@ exports.main = async function(event, context) {
       const time_stamp = '' + Math.ceil(Date.now() / 1000)
       const out_trade_no = `${tradeNo}`
       const sign_type = WXPayConstants.SIGN_TYPE_MD5
+      let packageStr = ''
 
       let orderParam = {
         body,
@@ -69,23 +67,24 @@ exports.main = async function(event, context) {
       }
 
       // 调用 wx-js-utils 中的统一下单方法
-      const { return_code, ...restData } = await pay.unifiedOrder(orderParam)
-
+      const orderres = await pay.unifiedOrder(orderParam)
+      const { return_code, ...restData } = orderres
+      console.log('unifiedOrder请求参数', orderParam, 'unifiedOrder返回参数', orderres)
       let order_id = null
 
       if (return_code === 'SUCCESS' && restData.result_code === 'SUCCESS') {
         const { prepay_id, nonce_str } = restData
-
+        packageStr = `prepay_id=${prepay_id}`
         // 微信小程序支付要单独进地签名，并返回给小程序端
         const sign = WXPayUtil.generateSignature(
           {
-            appId: mpAppId,
+            appId: APPID,
             nonceStr: nonce_str,
-            package: `prepay_id=${prepay_id}`,
+            package: packageStr,
             signType: 'MD5',
             timeStamp: time_stamp
           },
-          KEY
+          PAYKEY
         )
 
         let orderData = {
@@ -97,7 +96,7 @@ exports.main = async function(event, context) {
           body,
           total_fee,
           prepay_id,
-          sign,
+          package: packageStr,
           status: 0, // 订单文档的status 0 未支付 1 已支付 2 已关闭
           _openid: openid
         }
@@ -113,6 +112,8 @@ exports.main = async function(event, context) {
           out_trade_no,
           time_stamp,
           order_id,
+          sign_type,
+          package_str: packageStr,
           ...restData
         }
       })
@@ -123,9 +124,12 @@ exports.main = async function(event, context) {
       const { out_trade_no, prepay_id, body, total_fee } = data
 
       // 到微信支付侧查询是否存在该订单，并查询订单状态，看看是否已经支付成功了。
-      const { return_code, ...restData } = await pay.orderQuery({
+      const queryRes = await pay.orderQuery({
         out_trade_no
       })
+      const { return_code, ...restData } = queryRes
+
+      console.log('orderQuery请求参数', { out_trade_no }, 'orderQuery返回参数', queryRes)
 
       // 若订单存在并支付成功，则开始处理支付
       if (restData.trade_state === 'SUCCESS') {

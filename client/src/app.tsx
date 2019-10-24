@@ -1,6 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import Index from './pages/index'
-
+import '@tarojs/async-await'
 import './app.less'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -10,7 +10,6 @@ import './app.less'
 // }
 
 class App extends Component {
-
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -19,36 +18,44 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    pages: [
-      'pages/index/index'
-    ],
+    pages: ['pages/animate/index', 'pages/orders/index', 'pages/index/index', 'pages/goods/index'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
+    tabBar: {
+      list: [
+        {
+          pagePath: 'pages/orders/index',
+          text: '订单'
+        },
+        {
+          pagePath: 'pages/goods/index',
+          text: '商品'
+        }
+      ]
+    },
     cloud: true
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (process.env.TARO_ENV === 'weapp') {
       Taro.cloud.init()
     }
   }
 
-  componentDidShow () {}
+  componentDidShow() {}
 
-  componentDidHide () {}
+  componentDidHide() {}
 
-  componentDidCatchError () {}
+  componentDidCatchError() {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
-    return (
-      <Index />
-    )
+  render() {
+    return <Index />
   }
 }
 
