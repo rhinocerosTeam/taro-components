@@ -1,0 +1,49 @@
+button {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.goods {
+  width: 348px;
+  height: 565px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px #efefef;
+  border-radius: 10px;
+  .coverImg {
+    width: 306px;
+    height: 306px;
+  }
+  .name {
+    font-size: 25px;
+    color: #000;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .priceBox {
+    margin-top: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .price {
+      color: #f8202a;
+      font-size: 30px;
+      Text {
+        font-size: 16px;
+      }
+    }
+    button {
+      height: 60px;
+      width: 145px;
+      text-align: center;
+      font-size: 24px;
+      background-image: linear-gradient(to right, #f8202a, #fb5d2a);
+      border-radius: 60px;
+      color: #fff;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { View, Text, Button } from '@tarojs/components'
 import './index.less'
 import { REQUEST_STATUS } from '../../constants'
 import PayUtils from '../../utils/payUtils'
+import GoodsBox from '../../components/goodsBox'
 export default class Index extends Component {
   /**
    * 指定config的类型声明为: Taro.Config
@@ -44,46 +45,17 @@ export default class Index extends Component {
     console.debug(1111111)
   }
 
-  unifiedorder(id) {
-    Taro.cloud
-      .callFunction({
-        name: 'pay',
-        data: { type: 'unifiedorder', data: { goodId: id } }
-      })
-      .then(res => {
-        let { code, data } = res.result
-        if (code == REQUEST_STATUS.SUCCESS) {
-          this.unifiedorder_data = data
-          console.log('this.unifiedorder_data', this.unifiedorder_data)
-
-          PayUtils.requestPayment(
-            this.unifiedorder_data.out_trade_no,
-            null,
-            () => {
-              console.log('支付成功')
-            },
-            () => {
-              console.log('支付失败')
-            }
-          )
-        }
-      })
-  }
+  unifiedorder(id) {}
   render() {
     let { orders } = this.state
     return (
       <View className='index'>
-        {orders &&
-          orders.map(obj => {
-            return (
-              <View key={'goods_' + obj._id}>
-                <View>
-                  {obj.name} / {obj.price}
-                </View>
-                <Button onClick={this.unifiedorder.bind(this, obj._id)}>下单</Button>
-              </View>
-            )
-          })}
+        <View class='goodsCont'>
+          {orders &&
+            orders.map(obj => {
+              return <GoodsBox class='GoodsBox' data={obj} key={'goodsbox_' + obj._id} />
+            })}
+        </View>
       </View>
     )
   }

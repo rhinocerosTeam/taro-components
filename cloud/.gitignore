@@ -3,4 +3,4 @@ dist/
 .rn_temp/
 node_modules/
 .DS_Store
-cloud/functions/pay/config/index.js
+functions/pay/config/index.js
