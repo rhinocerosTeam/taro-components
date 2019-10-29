@@ -1,8 +1,133 @@
-.swiperBox .swiper {
-  width: 750px;
-  height: 680px;
-  .swiper-item image {
+page {
+  padding-bottom: 100px;
+}
+.swiperBox {
+  position: relative;
+  .swiper {
     width: 750px;
     height: 680px;
+    .swiper-item image {
+      width: 750px;
+      height: 680px;
+    }
+  }
+  .returnIcon {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+  }
+}
+.goodsDescCont {
+  padding: 0 30px;
+  .goodsPriceBox {
+    display: flex;
+    height: 120px;
+    align-items: center;
+    justify-content: space-between;
+    .priceBox {
+      display: flex;
+      height: 52px;
+
+      .price {
+        font-size: 52px;
+        color: #ec252a;
+      }
+      .oldPrice {
+        margin-top: 30px;
+        font-size: 20px;
+        color: #b0b0b0;
+        text-decoration: line-through;
+      }
+    }
+    .shareBox {
+      height: 80px;
+      display: flex;
+      margin-right: -30px;
+
+      .buyNum {
+        box-sizing: border-box;
+        height: 80px;
+        padding-top: 40px;
+        border-right: 2px solid #9c9c9c;
+        padding-right: 30px;
+        font-size: 22px;
+        color: #9c9c9c;
+      }
+      .share {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 20px;
+        width: 100px;
+        .shareIcon {
+          width: 35px;
+          height: 35px;
+        }
+        .shareBtn {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .goodsName {
+    .names {
+      font-size: 30px;
+      color: #292929;
+      text-overflow: -o-ellipsis-lastline;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-height: 80px;
+    }
+    .greytext {
+      margin-top: 22px;
+      font-size: 25px;
+      color: #969696;
+    }
+  }
+}
+.detailCont {
+  padding: 0 30px;
+}
+.footerBox {
+  position: fixed;
+  width: 750px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  .button {
+    width: 130px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    image {
+      width: 45px;
+      height: 46px;
+    }
+    View {
+      font-size: 20px;
+      color: #a2a2a2;
+    }
+  }
+  .buyBtnBox {
+    width: 490px;
+    font-size: 27px;
+    color: #fbf0ec;
+    .buy {
+      width: 100%;
+      background-color: #f02423;
+      line-height: 100px;
+      text-align: center;
+    }
   }
 }
