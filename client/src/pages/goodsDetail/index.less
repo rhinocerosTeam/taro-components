@@ -1,6 +1,11 @@
 page {
   padding-bottom: 100px;
 }
+.greyLine {
+  height: 18px;
+  width: 750px;
+  background-color: #f7f7f7;
+}
 .swiperBox {
   position: relative;
   .swiper {
@@ -20,7 +25,8 @@ page {
   }
 }
 .goodsDescCont {
-  padding: 0 30px;
+  padding: 0 30px 50px;
+
   .goodsPriceBox {
     display: flex;
     height: 120px;
@@ -35,6 +41,7 @@ page {
         color: #ec252a;
       }
       .oldPrice {
+        margin-left: 10px;
         margin-top: 30px;
         font-size: 20px;
         color: #b0b0b0;
@@ -45,12 +52,11 @@ page {
       height: 80px;
       display: flex;
       margin-right: -30px;
-
       .buyNum {
         box-sizing: border-box;
         height: 80px;
         padding-top: 40px;
-        border-right: 2px solid #9c9c9c;
+        border-right: 2px solid #efefef;
         padding-right: 30px;
         font-size: 22px;
         color: #9c9c9c;
@@ -93,6 +99,59 @@ page {
 }
 .detailCont {
   padding: 0 30px;
+}
+.titleBar {
+  text-align: center;
+  font-size: 20px;
+  background-color: #f7f7f7;
+  height: 50px;
+  line-height: 50px;
+  color: #959595;
+}
+.specificationsCont {
+  .tableView {
+    width: 750px;
+
+    .viewBox {
+      height: 80px;
+      padding: 0 30px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      box-sizing: border-box;
+      width: 750px;
+      &:after {
+        position: absolute;
+        bottom: 0;
+        width: 690px;
+        height: 2px;
+        background-color: #eeeeee;
+        content: '';
+        display: block;
+      }
+      &:last-of-type {
+        &:after {
+          display: none;
+        }
+      }
+      .name {
+        width: 102px;
+        font-size: 24px;
+        color: #999;
+      }
+      .text {
+        width: 530px;
+        font-size: 24px;
+        color: #505050;
+      }
+      .rightIcon {
+        width: 16px;
+        height: 32px;
+        margin-left: 44px;
+      }
+    }
+  }
 }
 .footerBox {
   position: fixed;

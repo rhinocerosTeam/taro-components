@@ -1,7 +1,8 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Button, Swiper, SwiperItem } from '@tarojs/components'
+import { View, Text, Button, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.less'
 import { img } from '../../constants'
+import Appraise from '../../components/appraise'
 
 export default class Index extends Component {
   config: Config = {
@@ -59,13 +60,26 @@ export default class Index extends Component {
             <View class='greytext'>草木青黄百香果</View>
           </View>
         </View>
+        <View class='greyLine' alt='灰色分割线'></View>
         <View class='specificationsCont' alt='规格'>
-          <View>
-            <View>规格</View>
-            <View>已选择:规格:1个</View>
+          <View class='tableView'>
+            <View class='viewBox'>
+              <View class='name'>规格</View>
+              <View class='text'>已选择:规格:1个</View>
+              <Image src={img.rightIcon} class='rightIcon' />
+            </View>
+            <View class='viewBox'>
+              <View class='name'>规格</View>
+              <View class='text'>已选择:规格:1个</View>
+              <Image src={img.rightIcon} class='rightIcon' />
+            </View>
           </View>
         </View>
-        <View alt='评价'></View>
+        <View class='greyLine' alt='灰色分割线'></View>
+        <View alt='评价'>
+          <Appraise></Appraise>
+        </View>
+        <View class='titleBar'> ——— 宝贝详情 ——— </View>
         <View class='detailCont' alt='商品详情'>
           <Image src={img.shareIcon} />
         </View>
